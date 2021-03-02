@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactRequest;
+use App\models\Contact;
+
 
 class ContactController extends Controller{
     
 	public function submit(ContactRequest $req){
-		//$validation = $req->validate();
+
+		$contact = new Contact();
+		$contact->name = $req->input('name');
+		$contact->email = $req->input('email');
+		$contact->subject = $req->input('subject');
+		$contact->messege = $req->input('messege');
+
+		$contact->save();
+
+		return redirect()->route('home')->with('success', 'Message add');
 	}
 
 }
