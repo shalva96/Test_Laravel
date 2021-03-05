@@ -22,4 +22,10 @@ class ContactController extends Controller{
 		return redirect()->route('home')->with('success', 'Message add');
 	}
 
+	public function allData(){
+		$contact = new Contact();
+		return view('messages', ['data' => $contact->orderBy('id', 'asc')->take(10)->get()]);
+	}
+
+
 }
